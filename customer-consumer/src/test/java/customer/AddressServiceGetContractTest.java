@@ -17,10 +17,10 @@ import java.util.Map;
 import java.util.UUID;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "address_provider", pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = "address-provider", pactVersion = PactSpecVersion.V3)
 public class AddressServiceGetContractTest {
 
-    @Pact(provider = "address_provider", consumer = "customer_consumer")
+    @Pact(provider = "address-provider", consumer = "customer-consumer")
     public RequestResponsePact pactForGetExistingAddressId(PactDslWithProvider builder) {
 
         DslPart body = LambdaDsl.newJsonBody((o) -> o
@@ -46,7 +46,7 @@ public class AddressServiceGetContractTest {
                 .toPact();
     }
 
-    @Pact(provider = "address_provider", consumer = "customer_consumer")
+    @Pact(provider = "address-provider", consumer = "customer-consumer")
     public RequestResponsePact pactForGetNonExistentAddressId(PactDslWithProvider builder) {
 
         Map<String, Object> providerStateParams = Map.of("addressId", AddressId.NON_EXISTING_ADDRESS_ID);
@@ -61,7 +61,7 @@ public class AddressServiceGetContractTest {
                 .toPact();
     }
 
-    @Pact(provider = "address_provider", consumer = "customer_consumer")
+    @Pact(provider = "address-provider", consumer = "customer-consumer")
     public RequestResponsePact pactForGetInvalidAddressId(PactDslWithProvider builder) {
 
         return builder
