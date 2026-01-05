@@ -1,0 +1,28 @@
+name: Java CI
+
+on: [push]
+
+jobs:
+  run-the-tests:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        java-version: [ '21', '22', '23', '24', '25']
+      fail-fast: false
+
+    steps:
+      - uses: actions/checkout@v5
+      - name: Set up JDK ${{ matrix.java-version }}
+        uses: actions/setup-java@v5
+        with:
+          java-version: ${{ matrix.java-version }}
+          distribution: 'temurin'
+      - name: Check active Java version
+        run: javac -version
+      - name: Run customer-consumer tests
+        working-directory: ./customer-consumer
+        run: mvn clean test
+      - name: Run address-provider tests
+        working-directory: ./address-provider
+        run: mvn clean test
