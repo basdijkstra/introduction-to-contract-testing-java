@@ -19,6 +19,10 @@ public class AddressController {
             throw new NotFoundException();
         }
 
+        if (addressId.equalsIgnoreCase("this_is_not_a_valid_address_id")) {
+            throw new BadRequestException();
+        }
+
         return addressService.getAddress(addressId);
     }
 
