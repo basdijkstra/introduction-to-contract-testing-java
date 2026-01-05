@@ -23,6 +23,16 @@ public class AddressServiceGetContractTest {
     @Pact(provider = "address-provider", consumer = "order-consumer")
     public RequestResponsePact pactForGetExistingAddressId(PactDslWithProvider builder) {
 
+        /**
+         * TODO: Add two fields to the expected response:
+         *   - one field 'state', which should be a string (can be any string)
+         *   - another field 'country', which should also be a string, but this one
+         *       only accepts 'United States' or 'Canada' as a value
+         *
+         * TODO: Also add example values to be used when populating the mock response, for example
+         *   'Tennessee' for the state and 'United States' for the country.
+         */
+
         DslPart body = LambdaDsl.newJsonBody((o) -> o
                 .uuid("id", UUID.fromString(AddressId.EXISTING_ADDRESS_ID))
                 .stringType("addressType", "billing")
@@ -30,8 +40,6 @@ public class AddressServiceGetContractTest {
                 .integerType("number", 123)
                 .stringType("city", "Nothingville")
                 .integerType("zipCode", 54321)
-                .stringType("state", "Tennessee")
-                .stringMatcher("country", "United States|Canada", "United States")
         ).build();
 
         Map<String, Object> providerStateParams = Map.of("addressId", AddressId.EXISTING_ADDRESS_ID);
@@ -70,6 +78,11 @@ public class AddressServiceGetContractTest {
         Address address = client.getAddress(AddressId.EXISTING_ADDRESS_ID);
 
         Assertions.assertEquals(AddressId.EXISTING_ADDRESS_ID, address.getId());
+
+        /**
+         * TODO: Add assertions that check that the 'state' and 'country' response fields
+         *   will be parsed and read correctly if returned by the provider.
+         */
     }
 
     @Test
