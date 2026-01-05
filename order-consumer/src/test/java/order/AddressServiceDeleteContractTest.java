@@ -12,10 +12,10 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import java.io.IOException;
 
 @ExtendWith(PactConsumerTestExt.class)
-@PactTestFor(providerName = "address_provider", pactVersion = PactSpecVersion.V3)
+@PactTestFor(providerName = "address-provider", pactVersion = PactSpecVersion.V3)
 public class AddressServiceDeleteContractTest {
 
-    @Pact(provider = "address_provider", consumer = "order_consumer")
+    @Pact(provider = "address-provider", consumer = "order-consumer")
     public RequestResponsePact pactForDeleteCorrectlyFormattedAddressId(PactDslWithProvider builder) {
 
         return builder

@@ -1,5 +1,6 @@
 package order;
 
+import org.apache.coyote.BadRequestException;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.client.ClientHttpResponse;
 import org.springframework.stereotype.Component;
@@ -25,6 +26,9 @@ public class AddressErrorHandler implements ResponseErrorHandler {
             //Handle CLIENT_ERROR
             if (httpResponse.getStatusCode() == HttpStatus.NOT_FOUND) {
                 throw new NotFoundException();
+            }
+            if (httpResponse.getStatusCode() == HttpStatus.BAD_REQUEST) {
+                throw new BadRequestException();
             }
         }
     }
