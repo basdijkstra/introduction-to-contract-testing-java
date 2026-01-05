@@ -2,6 +2,10 @@ name: Java CI
 
 on: [push]
 
+env:
+  PACT_BROKER_BASE_URL: ${{ secrets.PACT_BROKER_BASE_URL }}
+  PACT_BROKER_TOKEN: ${{ secrets.PACT_BROKER_TOKEN }}
+
 jobs:
   run-the-tests:
     runs-on: ubuntu-latest
