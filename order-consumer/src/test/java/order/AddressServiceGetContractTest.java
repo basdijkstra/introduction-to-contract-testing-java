@@ -10,6 +10,7 @@ import au.com.dius.pact.core.model.PactSpecVersion;
 import au.com.dius.pact.core.model.RequestResponsePact;
 import au.com.dius.pact.core.model.annotations.Pact;
 import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 
@@ -67,6 +68,35 @@ public class AddressServiceGetContractTest {
         /**
          * TODO: Add assertions that check that the 'state' and 'country' response fields
          *   will be parsed and read correctly if returned by the provider.
+         */
+    }
+
+    @Pact(provider = "address-provider", consumer = "order-consumer")
+    @Disabled
+    public RequestResponsePact pactForGetNonExistingAddressId(PactDslWithProvider builder) {
+
+        /**
+         * TODO: Remove the @Disabled annotation, then define a new Pact segment that records the behaviour
+         *   for the situation where the address ID is not known on the provider side.
+         *   - Expect that the provider returns an HTTP 404 in that case
+         *   - There is no response body here, so you don't have to write expectations for that
+         *   - Use the provider state 'Address does not exist' and pass in AddressId.NON_EXISTING_ADDRESS_ID as a parameter
+         *   - Use 'Retrieving an address ID that does not exist' as a description in uponReceiving()
+         */
+
+        return null;
+    }
+
+    @Test
+    @Disabled
+    @PactTestFor(pactMethod = "pactForGetNonExistingAddressId")
+    public void testFor_GET_nonexistingAddressId_shouldYieldHttp404(MockServer mockServer) {
+
+        /**
+         * TODO: Remove the @Disabled annotation, then write a test that calls
+         *   getAddress(AddressId.NON_EXISTING_ADDRESS_ID) on an AddressServiceClient pointing
+         *   to the MockServer and verify that doing so throws a NotFoundException using Assertions.assertThrows().
+         *   See the tests for the customer-consumer for an example of the syntax if you need it.
          */
     }
 }
