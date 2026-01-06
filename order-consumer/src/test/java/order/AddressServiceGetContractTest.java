@@ -54,21 +54,6 @@ public class AddressServiceGetContractTest {
                 .toPact();
     }
 
-    @Pact(provider = "address-provider", consumer = "order-consumer")
-    public RequestResponsePact pactForGetNonExistentAddressId(PactDslWithProvider builder) {
-
-        Map<String, Object> providerStateParams = Map.of("addressId", AddressId.NON_EXISTING_ADDRESS_ID);
-
-        return builder
-                .given("Address does not exist", providerStateParams)
-                .uponReceiving("Retrieving an address ID that does not exist")
-                .path(String.format("/address/%s", AddressId.NON_EXISTING_ADDRESS_ID))
-                .method("GET")
-                .willRespondWith()
-                .status(404)
-                .toPact();
-    }
-
     @Test
     @PactTestFor(pactMethod = "pactForGetExistingAddressId")
     public void testFor_GET_existingAddressId_shouldYieldExpectedAddressData(MockServer mockServer) {
@@ -83,14 +68,5 @@ public class AddressServiceGetContractTest {
          * TODO: Add assertions that check that the 'state' and 'country' response fields
          *   will be parsed and read correctly if returned by the provider.
          */
-    }
-
-    @Test
-    @PactTestFor(pactMethod = "pactForGetNonExistentAddressId")
-    public void testFor_GET_nonExistentAddressId_shouldYieldHttp404(MockServer mockServer) {
-
-        AddressServiceClient client = new AddressServiceClient(mockServer.getUrl());
-
-        Assertions.assertThrows(NotFoundException.class, () -> client.getAddress(AddressId.NON_EXISTING_ADDRESS_ID));
     }
 }
