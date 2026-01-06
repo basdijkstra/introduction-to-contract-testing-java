@@ -23,6 +23,8 @@
     <junit.version>5.10.0</junit.version>
     <pact.version>4.6.19</pact.version>
     <pact.consumer.junit5.version>4.0.10</pact.consumer.junit5.version>
+    <wiremock.version>3.13.0</wiremock.version>
+    <wiremock.pact.lib.version>0.6.1</wiremock.pact.lib.version>
   </properties>
 
   <dependencies>
@@ -62,6 +64,20 @@
       <groupId>au.com.dius</groupId>
       <artifactId>pact-jvm-consumer-junit5</artifactId>
       <version>${pact.consumer.junit5.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>org.wiremock</groupId>
+      <artifactId>wiremock-standalone</artifactId>
+      <version>${wiremock.version}</version>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <groupId>se.bjurr.wiremockpact</groupId>
+      <artifactId>wiremock-pact-lib</artifactId>
+      <version>${wiremock.pact.lib.version}</version>
       <scope>test</scope>
     </dependency>
 
